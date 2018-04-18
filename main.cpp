@@ -2,29 +2,16 @@
 #include <string>
 #include <sstream>
 #include <vector>
+#include <map>
 
-// Implement display function
-void display_turtles(std::vector<std::string> turtle) {
+struct turtle {
+    std::string turtle_names;
+    int identifier;
+};
 
-    // Implement below
-
-    for(auto x: turtle)
-        std::cout << x << std::endl;
-}
-
-
-
-
-
-
-// Implement sorting algorithm
-std::vector<std::string> radix_sort(std::vector<std::string> a) {
-    std::vector<std::string> sorted_vec;
-
-    // Implement below
-
-
-    return sorted_vec;
+void print_info(std::vector<std::string> a) {
+    for(auto x: a)
+        std::cout << a << std::endl;
 }
 
 /**
@@ -41,20 +28,60 @@ equal to two hundred.
  */
 
 int main() {
-    std::string line_in;
-    std::stringstream ss;
-    std::vector<std::string> turtle_names;
 
-    // Modify code
-    while(std::cin >> line_in) {
-        turtle_names.push_back(line_in);
+    // First need to check for test cases
+    int test_case;
+    std::cin >> test_case;
 
-        // Modify code
-        std::vector<std::string> temp_vec = radix_sort(turtle_names);
-        display_turtles(temp_vec); // Displays the sorted information
-        temp_vec.clear();
-        turtle_names.clear();
+    // Then create a loop based off of the test case to cycle through
+    for (int i = 0; i < test_case; ++i) {
+
+        int turtle_stack;
+        std::cin >> turtle_stack;
+        std::cin.ignore();
+
+        // -- Declaring Variables --
+        std::map<std::string, int> desired_map;
+        std::vector<turtle> turtle_vec;
+        std::vector<std::string> output;
+        turtle t;
+        std::string user_input;
+
+        // Have two loops (One for the original then one for Expected)
+        for (int j = 0; j < turtle_stack; ++j) {
+            std::getline(std::cin, user_input); // Full text strings
+            t.identifier = 0; // Default value till later on
+            t.turtle_names = user_input;
+            turtle_vec.push_back(t);
+        }
+
+        // Secondary loop for expected order
+        for (int k = 0; k < turtle_stack; ++k) {
+            std::getline(std::cin, user_input); // Full text strings
+            desired_map[user_input] = k;
+            output.push_back(user_input);
+        }
+
+        // Swap orders
+        for (int l=0; l<turtle_stack; ++l)
+        {
+            turtle_vec[l].identifier = desired_map[turtle_vec[l].turtle_names];
+        }
+
+        int largest_val = -1, r_val = -1;
+        for (int m = 0; m < test_case; ++m) {
+
+        }
+
+
+
+        // Print out vector information
+        print_info(output);
+        std::cout << std::endl;
     }
+
+
+
 
     return 0;
 }
