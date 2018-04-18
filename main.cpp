@@ -4,15 +4,18 @@
 #include <vector>
 #include <map>
 
+/**
+ * @author Jamal Rasool
+ * @version 1.0
+ * @note UVA 10152
+ * Program designed to go through and take n test cases, then from there will input the number of test strings (turtle)
+ * then check to see if it can be sorted to display the correct order.
+ */
+
 struct turtle {
     std::string turtle_names;
     int identifier;
 };
-
-void print_info(std::vector<std::string> a) {
-    for(auto x: a)
-        std::cout << a << std::endl;
-}
 
 /**
  * UVA 10152
@@ -46,6 +49,7 @@ int main() {
         std::vector<std::string> output;
         turtle t;
         std::string user_input;
+        int largest_val = -1, r_val = -1;
 
         // Have two loops (One for the original then one for Expected)
         for (int j = 0; j < turtle_stack; ++j) {
@@ -64,35 +68,24 @@ int main() {
 
         // Swap orders
         for (int l=0; l<turtle_stack; ++l)
-        {
             turtle_vec[l].identifier = desired_map[turtle_vec[l].turtle_names];
+
+
+        // Checking string for length doing sort.
+        for (int m=0; m<turtle_stack; ++m)
+        {
+            if (turtle_vec[m].identifier > largest_val)
+                largest_val = turtle_vec[m].identifier;
+            else if (turtle_vec[m].identifier > r_val)
+                r_val = turtle_vec[m].identifier;
         }
-
-        int largest_val = -1, r_val = -1;
-        for (int m = 0; m < test_case; ++m) {
-
-        }
-
-
 
         // Print out vector information
-        print_info(output);
+        for(int n=r_val; n>=0; --n)
+            std::cout << output[n] << std::endl;
+
         std::cout << std::endl;
     }
 
-
-
-
     return 0;
 }
-
-/**
-
- For each test case, the output consists of a sequence of turtle names, one per line, indicating the order in
-which turtles are to leave their positions in the stack and crawl to the top. This sequence of operations
-should transform the original stack into the required stack and should be as short as possible. If more
-than one solution of shortest length is possible, any of the solutions may be reported.
-Print a blank line after each test case.
-
-
- */
